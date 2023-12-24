@@ -1,0 +1,74 @@
+<div id="booking" class="section">
+  <div class="section-center">
+    <div class="container">
+      <h3>Find the Flight</h3>
+
+      <!-- Form -->
+      <div *ngIf="showForm" class="booking-form">
+        <form (submit)="showFlights()">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <span class="form-label">From - </span><span class="form-label">To</span>
+                <select class="form-control" [(ngModel)]="distanceId" name="distanceId" required>
+                  <option *ngFor="let distance of flyingFromOptions" [value]="distance.distanceId">
+                    {{ distance.departureCity }} - {{ distance.destinationCity }}
+                  </option>
+                </select>
+                <span class="select-arrow"></span>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <span class="form-label">Departing</span>
+                <input class="form-control" type="date" required [(ngModel)]="flyingInDate" name="flyingInDate">
+              </div>
+            </div>
+          </div>
+          <div class="form-btn">
+            <button type="submit" class="submit-btn">Add Flight</button>
+          </div>
+        </form>
+        
+      </div>
+
+      <!-- Table -->
+      <div *ngIf="flights.length > 0; else noFlights">
+        <table>
+          <thead>
+            <tr>
+              <th>Flight Number</th>
+              <th>Departure Time</th>
+              <th>Arrival Time</th>
+              <th>Seats</th>
+              <th>Book</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let flight of flights">
+              <td>{{ flight.flightNumber }}</td>
+              <td>{{ flight.departureTime | date: 'short' }}</td>
+              <td>{{ flight.arrivalTime | date: 'short' }}</td>
+              <td>
+                <div *ngIf="flight.seats?.length > 0; else noSeats">
+                  Seats: {{ flight.seats.length }}
+                </div>
+                <ng-template #noSeats>
+                  No seats available
+                </ng-template>
+              </td>
+              <td>
+                <button class="btn btn-info" (click)="bookFlight(flight.flightId)">Book</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #noFlights>
+        <div class="no-flights-message">
+          <p>No flights found.</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

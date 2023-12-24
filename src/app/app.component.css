@@ -1,0 +1,20 @@
+#container {
+    /* Set the background image */
+    background-image: url('https://wallpaperaccess.com/full/878630.jpg'); /* Adjust the path as needed */
+    
+    /* Set background size and other styles */
+    background-size: cover; /* You can use 'contain' or other values based on your preference */
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Adjust the height as needed */
+    
+    /* Add other styles if necessary */
+  }
+
+
+
+  
+  nav {
+    background-color: cornflowerblue;
+    margin-bottom: 20px; /* Add margin at the bottom of the navbar */
+  }

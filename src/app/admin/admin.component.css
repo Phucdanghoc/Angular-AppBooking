@@ -1,0 +1,74 @@
+/* home.component.css */
+.container {
+  
+  max-width: 800px;
+  margin: auto;
+}
+
+h2 {
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.form-group {
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.submit-btn {
+  background-color: #ed145b;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.table {
+  margin-top: 20px;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+  width: 100%;
+}
+
+.table th, .table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.table thead th {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #ed145b;
+}
+
+.table tbody tr:hover {
+  background-color: #f2f2f2;
+}
+
+/* Optional: Style the form inputs */
+.form-control {
+  border-radius: 5px;
+}
+
+/* Optional: Style the search bar */
+.input-group {
+  width: 100%;
+}
+.form-label{
+  color: #fff;
+}
+.input-group-append .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Optional: Center the form */
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}

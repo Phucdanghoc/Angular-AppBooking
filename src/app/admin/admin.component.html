@@ -1,0 +1,80 @@
+<div class="container mt-5">
+  <h2>Add New Flight</h2>
+  <form (submit)="addNewFlight()">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <span class="form-label">From----</span><span class="form-label">To</span>
+          <select class="form-control" [(ngModel)]="distanceid" name="distanceid" required>
+            <option *ngFor="let distance of flyingFromOptions" [value]="distance.distanceId">
+              {{ distance.departureCity }} - {{ distance.destinationCity }}
+            </option>
+          </select>
+          <span class="select-arrow"></span>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <span class="form-label">Airline</span>
+          <select class="form-control" [(ngModel)]="airplane" name="airplane" required>
+            <option value="Vietnam Airlines">
+              Vietnam Airlines
+            </option>
+            <option value="Vietnam Airlines">
+              VietJet Air
+            </option>
+            <option value="Vietnam Airlines">
+              Bamboo Airways
+            </option>
+          </select>
+          <span class="select-arrow"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="form-label" for="departingDate">Departing</label>
+          <input class="form-control" type="date" required [(ngModel)]="departingDate" name="departingDate" required>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label class="form-label" for="departingDate">Time</label>
+          <input class="form-control" type="time" required [(ngModel)]="time" name="time" required>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-btn">
+          <button type="submit" class="submit-btn">Add Flight</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div *ngIf="flights.length > 0">
+    <h3 class="mt-4">All Flights</h3>
+    <div style="overflow: auto; max-height: 400px;">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Flying Number</th>
+            <th>Flying From</th>
+            <th>Flying To</th>
+            <th>Departing Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let flight of flights">
+            <td>{{ flight.flightNumber }}</td>
+            <td>{{ flight.flightDistanceDetails.departureCity }}</td>
+            <td>{{ flight.flightDistanceDetails.destinationCity }}</td>
+            <td>{{ flight.departureTime | date:'medium' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

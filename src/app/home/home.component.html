@@ -1,0 +1,51 @@
+<!-- home.component.html -->
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Welcome to Our Airline</h2>
+  
+    <!-- Bootstrap Search Bar -->
+    <div class="d-flex justify-content-center mb-4">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Ticket code here ..." [(ngModel)]="searchQuery" name="searchQuery">
+        <div class="input-group-append">
+          <button class="btn btn-primary" type="button" (click)="searchFlights()">Search</button>
+        </div>
+      </div>
+    </div>
+    <ng-template #notickets>
+      <p class="text-center">No available flights at the moment. Check back later!</p>
+    </ng-template>
+    <ng-template #tickets>
+      <p class="text-center">No available flights at the moment. Check back later!</p>
+    </ng-template>
+
+    <ng-template #noFlights>
+      <p class="text-center">No available flights at the moment. Check back later!</p>
+    </ng-template>
+    
+    <div *ngFor="let flight of flights">
+      <div class="card">
+        <div class="card-header">
+         {{ flight?.flightNumber }} ({{ flight?.airplane }})
+        </div>
+        <div class="card-body">
+          Departure: {{ flight?.departureCity }} - {{ flight?.departureTime | date:'medium' }}
+          <br>
+          Arrival: {{ flight?.destinationCity }} - {{ flight?.arrivalTime | date:'medium' }}
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngIf="seat">
+      <div class="card-header">
+        Flight Information
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ seat?.seatClass }} Seat - {{ seat?.seatNumber }}</h5>
+        <p class="card-text">Price: ${{ seat?.price }}</p>
+        <p class="card-text">Flight Number: {{ seat?.flight.flightNumber }}</p>
+        <p class="card-text">Departure City: {{ seat?.flight.flightDistanceDetails.departureCity }}</p>
+        <p class="card-text">Destination City: {{ seat?.flight.flightDistanceDetails.destinationCity }}</p>
+        <p class="card-text">Departure Time: {{ seat?.flight.departureTime | date: 'medium' }}</p>
+        <p class="card-text">Arrival Time: {{ seat?.flight.arrivalTime | date: 'medium' }}</p>
+      </div>
+    </div>
+  

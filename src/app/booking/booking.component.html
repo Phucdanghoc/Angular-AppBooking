@@ -1,0 +1,91 @@
+<div class="flight-details" *ngIf="flight">
+    <h2>{{ flight.flightNumber }} - {{ flight.airplane }}</h2>
+    <p>Departure: {{ flight.departureTime | date }}</p>
+    <p>Time: {{ flight.departureTime | date: 'shortTime' }}</p>
+
+    <p>Arrival: {{ flight.arrivalTime | date }}</p>
+    <p>Time: {{ flight.arrivalTime | date: 'shortTime' }}</p>
+
+    <p>From: {{ flight.flightDistanceDetails.departureCity }}</p>
+    <p>To: {{ flight.flightDistanceDetails.destinationCity }}</p>
+
+    <h3>Available Seats:</h3>
+    <div class="seats-container">
+        <!-- Eco Seats -->
+        <div *ngFor="let seat of flight.seats.$values" class="seat" [class.disabled]="!seat.isAvailable"
+            [ngClass]="{'eco-seat': seat.seatClass == 'Economy'}"
+            [ngClass]="{'eco-seat': seat.seatClass == 'Economy', 'bus-seat': seat.seatClass == 'Business', 'selected-seat': seat === selectedSeat}"
+            (click)="selectSeat(seat)">
+            <span>{{ seat.seatNumber }}</span>
+        </div>
+    </div>
+
+    <div *ngIf="showBookingForm">
+        <div class="booking-form">
+            <h2>Booking Form</h2>
+            
+            <form (ngSubmit)="submitBookingForm($event)" #bookingForm="ngForm">
+                <!-- User Information -->
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" [(ngModel)]="user.firstName + user.lastName"
+                        required>
+                </div>
+                <div *ngIf="selectedSeat" class="selected-seat-card">
+                    <h4>Selected Seat Details</h4>
+                    <p>Seat Number: {{ selectedSeat.seatNumber }}</p>
+                    <!-- Add more seat details as needed -->
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="" [(ngModel)]="user.email" required>
+                </div>
+                <!-- Baggage Information -->
+                <div class="form-group">
+                    <label for="baggageWeight">Baggage Weight (kg)</label>
+                    <input type="number" id="baggageWeight" name="baggageWeight" [(ngModel)]="baggageWeight" required>
+                </div>
+
+                <!-- Payment Button -->
+                <button type="submit" class="btn btn-primary" [disabled]="isBookingInProgress">Book</button>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="showBookingCard" class="booking-card">
+        <div class="card-header">
+            <h3>Booking Details</h3>
+        </div>
+        <div class="card-body">
+            <p><strong>Flight Number:</strong> {{ bookResponse.flightDetail.flightNumber }}</p>
+            <p><strong>Departure Time:</strong> {{ bookResponse.flightDetail.departureTime | date: 'short' }}</p>
+            <p><strong>Arrival Time:</strong> {{ bookResponse.flightDetail.arrivalTime | date: 'short' }}</p>
+            <p><strong>Seat Number:</strong> {{ bookResponse.flightDetail.seats.$values[0].seatNumber }}</p>
+            <p><strong>Baggage Weight:</strong> {{ bookResponse.baggageWeight }} kg</p>
+            <p><strong>Status:</strong> {{ bookResponse.status }}</p>
+
+            <h3 >Price : {{bookResponse.price}}$</h3>
+            <!-- Add more details as needed -->
+        </div>
+        <h3>Choose Payment Method:</h3>
+
+        <div class="payment-method" (click)="selectPaymentMethod('creditCard')">
+            <img src="credit-card-icon.png" alt="Credit Card">
+            <p>Credit Card</p>
+        </div>
+
+        <div class="payment-method" (click)="selectPaymentMethod('paypal')">
+            <img src="paypal-icon.png" alt="PayPal">
+            <p>PayPal</p>
+        </div>
+
+        <div class="payment-method" (click)="selectPaymentMethod('bankTransfer')">
+            <img src="bank-transfer-icon.png" alt="Bank Transfer">
+            <p>Bank Transfer</p>
+        </div>
+        <div class="card-footer">
+            <button class="btn btn-primary" [disabled]="isPaymentInProgress" (click)="makePayment()">Make
+                Payment</button>
+        </div>
+    </div>
+</div><!-- Add this inside your component template -->

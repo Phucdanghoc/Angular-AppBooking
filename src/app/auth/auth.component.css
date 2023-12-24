@@ -1,0 +1,113 @@
+/* login.component.css */
+
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 100vh;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    background: linear-gradient(to right, #ffffff, #36c7d4); /* Adjusted gradient background */
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+    width: 100%; /* Full width on small screens */
+    max-width: 800px; /* Limit width for larger screens */
+    text-align: center;
+    backdrop-filter: blur(20px); /* Apply a blur effect to the background */
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+  }
+  h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #555;
+  }
+  
+  input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+  }
+  
+  input:focus {
+    border-color: #007bff; /* Highlight border on focus */
+  }
+  
+  button {
+    background-color: #41c585;
+    color: #fff;
+    padding: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+    width: 50%;
+  }
+  
+  button:hover {
+    background-color: #f56d4e;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .register-button,
+  .guest-button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 12px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    flex: 1;
+    margin: 0 5px;
+  }
+  
+  .register-button:hover,
+  .guest-button:hover {
+    background-color: #218838;
+  }
+  .horizontal-form .form-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .horizontal-form .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+  
+  .horizontal-form label {
+    flex: 0 0 48%;
+  }
+  
+  .horizontal-form input {
+    flex: 0 0 48%;
+  }
+  select{
+    width: 100px;
+  }

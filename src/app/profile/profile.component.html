@@ -1,0 +1,103 @@
+<div class="container">
+
+    <div class="profile-container" *ngIf="user">
+        <div class="form-column">
+            <h3>Information</h3>
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName" [disabled]="!editMode">
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName" [disabled]="!editMode">
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" [(ngModel)]="user.address" [disabled]="!editMode">
+            </div>
+
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" [(ngModel)]="user.phoneNumber"
+                    [disabled]="!editMode">
+            </div>
+
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" [(ngModel)]="user.email" [disabled]="true">
+            </div>
+        </div>
+        <div class="form-column">
+            <div class="form-group">
+                <label for="sex">Sex:</label>
+                <input type="text" id="sex" name="sex" [(ngModel)]="user.sex" [disabled]="!editMode">
+            </div>
+
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select id="role" name="role" [(ngModel)]="user.role" [value]="user.role" [disabled]="!editMode">
+                    <!-- Add options for roles -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" [(ngModel)]="user.age" [disabled]="!editMode">
+            </div>
+
+            <div class="form-group">
+                <label for="credit">Credit:</label>
+                <input type="number" id="credit" name="credit" [(ngModel)]="user.credit" [disabled]="!editMode">
+            </div>
+
+            <div class="form-group">
+                <label for="skyMiles">Sky Miles:</label>
+                <input type="number" id="skyMiles" name="skyMiles" [(ngModel)]="user.skyMiles" [disabled]="!editMode">
+            </div>
+        </div>
+        <button *ngIf="!editMode" class="btn-edit" (click)="toggleEditMode()">Edit</button>
+        <button *ngIf="editMode" class="btn-save" (click)="saveChanges()">Save</button>
+    </div>
+
+    <div class="table-container" *ngIf="tickets.length > 0; else noFlights">
+        <table>
+            <thead>
+                <tr>
+                    <th>Ticket Number</th>
+                    <th>Seat Tyle</th>
+                    <th>Status</th>
+                    <th>Price</th>
+                    <th>Book</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let ticket of tickets">
+                    <td>{{ ticket.seatDetail.seatNumber }}</td>
+                    <td>{{ ticket.seatDetail.seatClass }}</td>
+                    <td>{{ticket.status }}</td>
+                    <td>
+                        ${{ticket.price}}
+                    </td>
+                    <td>
+                        <ng-container *ngIf="ticket.status === 'DONE'; else paymentButton">
+                            <button class="btn btn-danger" (click)="cancelBooking(ticket.bookingId)">Cancel</button>
+                        </ng-container>
+                        <ng-template #paymentButton>
+                            <button class="btn btn-info" (click)="payment(ticket.bookingId)">Payment</button>
+                        </ng-template>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <ng-template #noFlights>
+        <div class="no-flights-message">
+            <p>No flights found.</p>
+        </div>
+    </ng-template>
+
+
+</div>
